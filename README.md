@@ -1,4 +1,4 @@
-#Sky_Cast
+Sky_Cast
 
 A simple weather app built with Django that allows users to get real-time weather information for any city in the world. The app uses a weather API to fetch current weather data and displays it in a user-friendly interface.
 
