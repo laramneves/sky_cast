@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.3/superhero/bootstrap.rtl.min.css" integrity="sha512-Kghq6IhdiZiBhUVgmB2i5s3KfP6xP+Agc2Ez1AOR1yoOzDa5EAexQV94Qrv0zrbpeD8tbskZcjssvs2VzIWFvA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Sky App</title>
+    
+    <!-- Add Custom Styles -->
+    <style>
+        /* Adjust button size and positioning */
+        .btn-custom {
+            width: 100px;  /* Set a specific width for the button */
+            height: 40px;  /* Set a specific height for the button */
+            font-size: 18px;  /* Increase font size for better readability */
+            margin-top: 5px;  /* Adds space between button and content above */
+            
+        }
+
+        /* Adjust card positioning */
+        .card-custom {
+            margin-top: 15px;  /* Adds space between card and navbar */
+            padding: 10px;  /* Add padding inside the card for better appearance */
+            text-align: left; /* Align text inside the card to the left */
+            border-radius: 15%;
+        }
+
+        .jumbotron-custom {
+            text-align: center;
+            margin-top: 50px;  /* Adjust this value to move the jumbotron down */
+            margin-bottom: 50px;  /* Adjust this value to move the jumbotron down */
+        }
+
+        .image-custom {
+            width: 100px;
+            margin-top: 10px;  /* Adjust this value to control the space above the image */
+        }
+
+        .d-flex-custom {
+            display: flex;
+            justify-content: center; /* Center content horizontally */
+        }
+
+        .col-md{
+            height: 50px;
+            border-radius: 15%;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        .form-control{
+           height: 40px;
+           margin-top: 5px;
+           width: 300px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+        <div class="container d-flex justify-content-between align-items-center">
+            <!-- Left-aligned brand text -->
+            <a href="../" class="navbar-brand">Sky App</a>
+            <!-- Right-aligned text -->
+            <span class="navbar-text" style="color: rgb(39, 117, 161);"><strong>Powered by Django Framework</strong></span>
+        </div>
+    </div>
+
+    <br><br><br>
+    <div id="jumbotron" class="jumbotron jumbotron-custom">
+        <h1 class="display-5">Sky Desktop App </h1>
+        <h5>Your weather forecast</h5>
+        <img src="{% static 'images/cloudy.png' %}" class="image-custom">
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <form method="post" class="col-md">
+            {% csrf_token %}
+            <div class="input-group">
+                <input type="text" class="form-control" name="city" placeholder="Choose Your City ..." required>
+                <div class="input-group-btn">
+                    <button type="submit" class="btn btn-primary btn-custom">Search</button> <!-- Apply custom button styles -->
+                </div>
+            </div>
+        </form>
+    </nav>
+
+    <br><br>
+    <div class="row d-flex-custom">
+        {% if country_code and cordinate and temp and pressure and humidity %}
+        <div class="col d-flex justify-content-center">
+            <div class="card text-white bg-light mb-6 card-custom">
+                <div class="card-body">
+                    <h4><span class="badge badge-primary">Country Code :</span> {{ country_code }}</h4>
+                    <h4><span class="badge badge-primary">Coordinates [X,Y] :</span> {{ cordinate }}</h4>
+                    <h4><span class="badge badge-primary">Temperature in Celsius :</span> {{ temp }}</h4>
+                    <h4><span class="badge badge-primary">Pressure :</span> {{ pressure }} </h4>
+                    <h4><span class="badge badge-primary">Humidity : </span> {{ humidity }}</h4>
+                    <h4><span class="badge badge-primary">Forecast : </span> {{ main }} <img src="http://openweathermap.org/img/w/{{ icon }}.png" alt="Weather Icon" style="width:70px"></h4>
+                    <h4><span class="badge badge-primary">Description : </span> {{ description }}</h4>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+    </div>
+</body>
+</html>
