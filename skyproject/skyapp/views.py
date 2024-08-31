@@ -10,7 +10,7 @@ import json
 def page(request):
     if request.method == 'POST':
         city = request.POST['city'] #dicitionary like object to hold the data
-        source = urllib.request.urlopen('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=metric&appid=8d8924bd72c23b76a453a34fcecdb807').read()
+        source = urllib.request.urlopen('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=key').read()
         list_data = json.loads(source) #this will hold all the data that we are requesting
        
         #this will render everthing in index.html
